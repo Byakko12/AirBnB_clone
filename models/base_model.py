@@ -7,6 +7,7 @@ from datetime import datetime
 import uuid
 import models
 
+
 class BaseModel:
     """
     init attributes
@@ -41,5 +42,5 @@ class BaseModel:
         dict1['__class__'] = self.__class__.__name__
         dict1['created_at'] = self.created_at.isoformat()
         dict1['updated_at'] = self.updated_at.isoformat()
-        
+
         return dict1
