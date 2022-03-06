@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-File storage 
+File storage
 """
 
 from models.base_model import BaseModel
@@ -12,8 +12,9 @@ from models.place import Place
 from models.review import Review
 import json
 
-class_name = {"BaseModel": BaseModel, "User": User, "State": State, "City": City,
-              "Amenity": Amenity, "Place": Place, "Review": Review}
+class_name = {"BaseModel": BaseModel, "User": User, "State": State,
+              "City": City, "Amenity": Amenity, "Place": Place,
+              "Review": Review}
 
 
 class FileStorage:
@@ -40,12 +41,16 @@ class FileStorage:
             json.dump(dict2, f)
 
     def reload(self):
-        """deserializes the JSON file to __objects (only if the JSON file (__file_path)"""
+        """
+        deserializes the JSON file to __objects (only if the JSON file
+        (__file_path)
+        """
         try:
             with open(self.__file_path, "r") as f:
                 js_file = json.load(f)
                 for key, value in js_file.items():
-                    reloaded = class_name[js_file[key]["__class__"]](**js_file[key])
+                    reloaded = class_name[js_file[key]
+                                          ["__class__"]](**js_file[key])
                     self.__objects[key] = reloaded
         except FileNotFoundError:
             pass

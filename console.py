@@ -15,8 +15,9 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
-class_name = {"BaseModel": BaseModel, "User": User, "State": State, "City": City,
-              "Amenity": Amenity, "Place": Place, "Review": Review}
+class_name = {"BaseModel": BaseModel, "User": User, "State": State,
+              "City": City, "Amenity": Amenity, "Place": Place,
+              "Review": Review}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -42,7 +43,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, args_object):
-
+        """
+        Prints the string representation of an instance based
+        on the class name and id. Ex: $ show BaseModel 1234-1234-
+        """
         lines = args_object.split()
 
         if len(args_object) == 0:
@@ -62,6 +66,11 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destroy(self, args_object):
+        """
+        Deletes an instance based on the class name
+        and id (save the change into the JSON file).
+        Ex: $ destroy BaseModel 1234-1234-1234.
+        """
         lines = args_object.split()
 
         if len(args_object) == 0:
@@ -84,6 +93,11 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, args_object):
+        """
+        Prints all string representation of
+        all instances based or not on the class name.
+        Ex: $ all BaseModel or $ all.
+        """
         lines = args_object.split()
         if len(args_object) == 0:
             list_args = []
@@ -103,6 +117,12 @@ class HBNBCommand(cmd.Cmd):
             print(list_args)
 
     def do_update(self, args_object):
+        """
+        Updates an instance based on the class name
+        and id by adding or updating attribute
+        (save the change into the JSON file).
+        Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com".
+        """
         lines = shlex.split(args_object)
         stored_id = storage.all()
 
