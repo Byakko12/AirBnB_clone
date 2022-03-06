@@ -7,7 +7,7 @@ from models.review import Review
 from models.base_model import BaseModel
 from unittest.mock import patch
 import pycodestyle
-
+import models
 
 class Test_PEP8(unittest.TestCase):
     """

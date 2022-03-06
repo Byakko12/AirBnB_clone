@@ -7,7 +7,7 @@ from models.amenity import Amenity
 from models.base_model import BaseModel
 from unittest.mock import patch
 import pycodestyle
-
+import models
 
 class Test_PEP8(unittest.TestCase):
     """test User"""
