@@ -155,7 +155,7 @@ class HBNBCommand(cmd.Cmd):
         """End of file cmd"""
         return True
 
-    def emptyline(self, args):
+    def emptyline(self):
         "When there is an empty line it jumps"
         pass
 
