@@ -48,7 +48,7 @@ class Test_docstrings(unittest.TestCase):
         self.obj_members(HBNBCommand, inspect.isfunction)
         self.console = HBNBCommand()
 
-    def test_module_dostring(self):
+    def test_module_docstring(self):
         """
         Test for exist module docstrings
         """
@@ -65,13 +65,12 @@ class Test_docstrings(unittest.TestCase):
         self.assertIsNotNone(HBNBCommand.do_all.__doc__)
         self.assertIsNotNone(HBNBCommand.do_update.__doc__)
         self.assertIsNotNone(HBNBCommand.do_help.__doc__)
-        self.assertIsNotNone(HBNBCommand.help_EOF.__doc__)
         self.assertIsNotNone(HBNBCommand.help_quit.__doc__)
 
     def test_invalid_command(self):
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("Luffy")
-            self.assertEqual('*** Unknown syntax: Luffy\n' or '', f.getvalue())
+            HBNBCommand().onecmd("command")
+            self.assertEqual('*** Unknown syntax: command\n' or '', f.getvalue())
 
     def test_empty_line(self):
         """Testing empty input"""
@@ -300,7 +299,7 @@ class ShowTest(unittest.TestCase):
         self.assertEqual(f.getvalue(), expectet)
 
     def test_all(self):
-        """Validate show in both ways"""
+        """Validate all in both ways"""
         try:
             os.remove("file.json")
         except Exception as f:
@@ -313,10 +312,7 @@ class ShowTest(unittest.TestCase):
         self.assertNotEqual(f.getvalue(), '')
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all 123123")
-            self.assertEqual("** class doesn't exist **\n", f.getvalue())
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("all State")
-            self.assertEqual('["[Stat', f.getvalue()[:7])
+        self.assertEqual("** class doesn't exist **\n", f.getvalue())
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("ssss.all()")
         self.assertEqual(f.getvalue(), '*** Unknown syntax: ssss.all()\n')
@@ -360,9 +356,6 @@ class ShowTest(unittest.TestCase):
             HBNBCommand().onecmd("update User " + my_id + " Name")
             self.assertEqual(
                 "** value missing **\n", f.getvalue())
-        with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd("update User " + id + " name " + "Goku")
-        self.assertNotEqual(f.getvalue(), '')
         with patch('sys.stdout', new=StringIO()) as f:
             expectect = "*** Unknown syntax: asdasd.update()\n"
             HBNBCommand().onecmd("asdasd.update()")
